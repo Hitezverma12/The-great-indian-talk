@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Indian Wildlife</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e8f5e9;
+            margin: 0;
+            padding: 20px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0 }
+            to { opacity: 1 }
+        }
+
+        .title-box {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            width: 60%;
+            margin: auto;
+            border-radius: 15px;
+            animation: glow 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px #4caf50 }
+            to { box-shadow: 0 0 30px #1b5e20 }
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            width: 260px;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.4s, box-shadow 0.4s;
+            animation: popIn 1s ease-out;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.5); opacity: 0 }
+            to { transform: scale(1); opacity: 1 }
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="title-box">
+    <h1>Indian Wildlife</h1>
+</div>
+
+<div class="card-container">
+
+    <div class="card">
+        <img src="tiger.jpg" alt="Bengal Tiger">
+        <h2>Bengal Tiger</h2>
+        <p>The national animal of India, known for its strength and beauty. Found in Sundarbans, Ranthambore, and Jim Corbett.</p>
+    </div>
+
+    <div class="card">
+        <img src="elephant.jpg" alt="Indian Elephant">
+        <h2>Indian Elephant</h2>
+        <p>A gentle giant and a symbol of wisdom. Commonly seen in Kerala, Assam, and Karnataka forests.</p>
+    </div>
+
+    <div class="card">
+        <img src="peacock.jpg" alt="Peacock">
+        <h2>Indian Peacock</h2>
+        <p>The national bird of India, famous for its colorful feathers and beautiful monsoon dances.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
