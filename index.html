@@ -17,6 +17,44 @@
     <link rel="icon" type="image/png" href="favicon.png">
 
   <style>
+    /* ✨ Smooth Page Fade-In */
+body {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+body.loaded {
+  opacity: 1;
+}
+
+    /* 🌌 Animated Galaxy Background */
+body {
+  background: url('https://i.imgur.com/9aKxH0R.jpeg');
+  background-size: cover;
+  background-attachment: fixed;
+  animation: galaxyMove 40s linear infinite;
+}
+
+@keyframes galaxyMove {
+  0% { background-position: 0 0; }
+  50% { background-position: 1000px 1000px; }
+  100% { background-position: 0 0; }
+}
+
+    /* 🔥⚡ Cosmic Hover Buttons */
+header button, .nav-buttons button {
+  transition: 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+header button:hover, .nav-buttons button:hover {
+  color: white;
+  background: linear-gradient(45deg, #ff4d00, #ffae00, #0077ff);
+  box-shadow: 0 0 15px #ffae00, 0 0 25px #0077ff;
+  transform: translateY(-3px) scale(1.05);
+}
+
     header button{
   padding:8px 12px;
   margin:3px;
@@ -1055,6 +1093,12 @@ header button:hover{
       setTimeout(() => trail.remove(), 800);
     }
   </script>
+  <script>
+  window.onload = () => {
+    document.body.classList.add('loaded');
+  };
+</script>
+
 </body>
 </html>
 
