@@ -13,6 +13,11 @@
   <title>India Overview</title>
   <link rel="icon" type="image/png" href="favicon.png">
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
   <style>
     /* Global Styles & Variables */
     :root {
@@ -60,6 +65,7 @@
       background-size: 300% 300%;
       animation: colorPulse 18s ease-in-out infinite;
       transition: background var(--animation-speed-slow) ease;
+      font-family: 'Roboto', sans-serif;
     }
 
     body:hover {
@@ -79,23 +85,37 @@
     h1, h2, h3 {
       color: var(--primary-blue);
       letter-spacing: 0.01em;
+      font-family: 'Playfair Display', serif;
     }
     h1, h2, h3, .meaning {
       font-weight: 700;
       font-style: italic;
     }
+    h1 {
+      font-size: 3rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    h2 {
+      font-size: 2.5rem;
+    }
+    h3 {
+      font-size: 2rem;
+    }
     .lead {
       font-size: 1.05rem;
       color: #222; /* Specific color for lead text */
+      font-weight: 300;
     }
     .muted {
       color: #555;
+      font-weight: 400;
     }
     .meaning {
       color: #666;
       font-size: 0.95rem;
       margin-left: 1rem;
       white-space: nowrap;
+      font-family: 'Montserrat', sans-serif;
     }
     p, li {
       animation: textGlow 14s ease-in-out infinite;
@@ -128,10 +148,32 @@
       transition: all var(--animation-speed-medium) ease;
       position: relative;
       overflow: hidden;
+      background: linear-gradient(135deg, #0b5cff, #5a74ff);
+      color: #fff;
+      border-radius: 14px;
+      padding: 0.95rem 1.5rem;
+      box-shadow: 0 10px 22px rgba(11, 92, 255, 0.18);
+    }
+    button::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.45), transparent 25%);
+      opacity: 0;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: scale(0.8);
+      pointer-events: none;
     }
     button:hover {
-      transform: scale(1.07);
-      box-shadow: 0 0 12px #ff3b3b, 0 0 25px #ff1a1a, 0 0 45px #ff0000; /* Red Fire Glow */
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 14px 26px rgba(11, 92, 255, 0.25), 0 6px 16px rgba(0,0,0,0.12);
+    }
+    button:hover::after {
+      opacity: 1;
+      transform: scale(1.5);
+    }
+    button:active {
+      transform: translateY(0) scale(0.99);
     }
 
     /* Header & Navigation */
@@ -249,17 +291,166 @@
       transform: scaleX(1);
     }
 
-    /* Heading Row */
-    .heading-row {
-      display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
-      justify-content: space-between;
-      margin-bottom: 1rem; /* Added margin for spacing */
+    /* Landmarks Grid */
+    .landmarks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
     }
-    .heading-row h1, .heading-row h2, .heading-row h3 {
+    .landmark-card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .landmark-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .landmark-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .landmark-card h3 {
+      margin: 1rem;
+      font-size: 1.2rem;
+      color: var(--primary-blue);
+    }
+    .landmark-card p {
+      margin: 0 1rem 1rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+    .feature-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(245,248,255,0.96));
+      border: 1px solid rgba(11, 92, 255, 0.12);
+      border-radius: 20px;
+      padding: 1.35rem;
+      box-shadow: 0 18px 45px rgba(11, 92, 255, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 22px 50px rgba(11, 92, 255, 0.16);
+      background: linear-gradient(180deg, rgba(255,255,255,1), rgba(235,242,255,1));
+    }
+    .feature-card h3 {
+      margin: 0 0 0.75rem;
+      font-size: 1.15rem;
+      color: var(--dark-blue);
+    }
+    .feature-card p {
+      margin: 0 0 1.1rem;
+      color: #4c5f7a;
+      line-height: 1.55;
+    }
+    .feature-card a button {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1556ff, #3c88ff);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(11,92,255,0.22);
+    }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.3rem;
+      margin-top: 1rem;
+    }
+    .insight-card {
+      padding: 1.5rem;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255, 167, 38, 0.16);
+      box-shadow: 0 20px 50px rgba(255, 149, 0, 0.12);
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+    .insight-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255, 167, 38, 0.28);
+    }
+    .insight-card h3 {
+      margin: 0 0 0.75rem;
+      font-size: 2rem;
+      color: #ffb74d;
+    }
+    .insight-card p {
       margin: 0;
-      padding: 0;
+      line-height: 1.7;
+      color: #f0e4c0;
+    }
+    .insight-panel {
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: 1.2fr 0.8fr;
+      margin-top: 1.75rem;
+    }
+    @media (max-width: 920px) {
+      .insight-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+    .spark-card {
+      padding: 1.7rem;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 167, 38, 0.18);
+      box-shadow: 0 24px 62px rgba(255, 149, 0, 0.13);
+      backdrop-filter: blur(14px);
+    }
+    .spark-card h3 {
+      margin: 0 0 0.8rem;
+      color: #ffe0a1;
+      font-size: 1.7rem;
+    }
+    .spark-card p {
+      margin: 0 0 1.4rem;
+      color: #d9c59f;
+      line-height: 1.8;
+    }
+    .stat-pill {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.95rem 1rem;
+      margin-bottom: 0.85rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255, 193, 7, 0.16);
+    }
+    .stat-pill span {
+      color: #f6e0ae;
+      font-size: 0.95rem;
+    }
+    .stat-pill strong {
+      font-size: 1.45rem;
+      color: #fff;
+    }
+
+    /* Section Image */
+    .section-image {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .section-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
     }
 
     /* Grid Layout */
@@ -397,7 +588,89 @@
       display: inline; /* This seems to be the intended behavior for spans within list items */
     }
 
-    /* Background Elements */
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+      color: white;
+    }
+    .hero-content {
+      text-align: center;
+      z-index: 2;
+      max-width: 800px;
+      padding: 2rem;
+    }
+    .hero-title {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease-out;
+      text-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    .hero-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      font-weight: 300;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      animation: fadeInUp 1s ease-out 1s both;
+    }
+    .stat {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease;
+    }
+    .stat:hover {
+      transform: translateY(-10px);
+    }
+    .stat i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .floating-elements {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .floating-icon {
+      position: absolute;
+      font-size: 3rem;
+      color: rgba(255,255,255,0.3);
+      animation: float 6s ease-in-out infinite;
+    }
+    .icon1 { top: 20%; left: 10%; animation-delay: 0s; }
+    .icon2 { top: 30%; right: 15%; animation-delay: 2s; }
+    .icon3 { bottom: 25%; left: 20%; animation-delay: 4s; }
+    .icon4 { bottom: 20%; right: 10%; animation-delay: 1s; }
     .page-background {
       position: fixed;
       inset: 0;
@@ -640,10 +913,19 @@
       0% { background-position: 0 0; }
       100% { background-position: 120px 120px; }
     }
-    @keyframes galaxyMove { /* Not currently used */
-      0% { background-position: 0 0; }
-      50% { background-position: 1000px 1000px; }
-      100% { background-position: 0 0; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Specific Element Styles */
@@ -728,71 +1010,59 @@
     section { background: rgba(255, 255, 255, 0.92); } /* Slightly more opaque */
     .toc { background: var(--white-transparent-high); }
 
-    /* Lightning Bolt & Shockwave Effects */
-    .bolt {
-      position: fixed;
-      width: 4px;
-      height: 120px;
-      background: white;
-      box-shadow: 0 0 20px #00eaff, 0 0 40px #00eaff, 0 0 60px #00eaff;
-      transform-origin: center;
-      pointer-events: none;
-      animation: boltFade 0.35s linear forwards;
-    }
-    .flash {
-      position: fixed;
-      inset: 0;
-      background: white;
-      opacity: 0.7;
-      pointer-events: none;
-      animation: flashFade 0.25s ease-out forwards;
-    }
-    .shockwave { /* Added for shockwave effect */
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 50%;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.3);
-      transform: translate(-50%, -50%);
-      animation: shockwaveExpand 0.5s ease-out forwards;
-      pointer-events: none;
-    }
-
-    /* Cursor Trail */
+    /* Cursor Trail Flame Effect */
     .cursor-trail {
       position: fixed;
-      pointer-events: none;
-      width: 12px;
-      height: 12px;
+      z-index: 99999;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
-      background: var(--particle-color);
-      box-shadow: 0 0 8px var(--particle-color), 0 0 15px var(--particle-glow);
-      animation: trailFade 0.8s ease-out forwards;
-      z-index: 9999;
+      pointer-events: none;
+      background: radial-gradient(circle at 32% 30%, rgba(255, 216, 132, 0.96), rgba(255, 147, 33, 0.85) 40%, rgba(255, 84, 0, 0.55) 65%, transparent 95%);
+      box-shadow: 0 0 18px rgba(255, 153, 0, 0.35), 0 0 38px rgba(255, 183, 70, 0.22);
+      transform: translate(-50%, -50%) scale(var(--scale, 1));
+      animation: trailFlame 0.9s ease-out forwards;
+      mix-blend-mode: screen;
+      will-change: transform, opacity;
+    }
+
+    /* Scroll to Top Button */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary-blue);
+      color: white;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .scroll-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .scroll-to-top:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
     }
 
     /* Keyframes */
-    @keyframes boltFade {
-      0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(0.5); }
-    }
-    @keyframes flashFade {
-      0% { opacity: 0.7; }
-      100% { opacity: 0; }
-    }
-    @keyframes shockwaveExpand {
-      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-      100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
-    }
-    @keyframes trailFade {
+    @keyframes trailFlame {
       0% {
         opacity: 1;
-        transform: scale(1) translate(0, 0);
+        transform: translate(-50%, -50%) scale(var(--scale, 1));
       }
       100% {
         opacity: 0;
-        transform: scale(0) translate(var(--tx, 0px), var(--ty, 0px));
+        transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 0px))) scale(0.35);
       }
     }
   </style>
@@ -820,6 +1090,39 @@
     <button id="btn-hi" onclick="setLanguage('hi')">हिन्दी (Hindi)</button>
   </div>
 
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title"><i class="fas fa-map-marked-alt"></i> Discover India</h1>
+      <p class="hero-subtitle">A Land of Diversity, Culture, and Innovation</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <i class="fas fa-users"></i>
+          <span class="stat-number">1.4B+</span>
+          <span class="stat-label">Population</span>
+        </div>
+        <div class="stat">
+          <i class="fas fa-globe-asia"></i>
+          <span class="stat-number">3.3M</span>
+          <span class="stat-label">km² Area</span>
+        </div>
+        <div class="stat">
+          <i class="fas fa-language"></i>
+          <span class="stat-number">22+</span>
+          <span class="stat-label">Official Languages</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-background">
+      <div class="floating-elements">
+        <div class="floating-icon icon1"><i class="fas fa-taj-mahal"></i></div>
+        <div class="floating-icon icon2"><i class="fas fa-mountain"></i></div>
+        <div class="floating-icon icon3"><i class="fas fa-utensils"></i></div>
+        <div class="floating-icon icon4"><i class="fas fa-music"></i></div>
+      </div>
+    </div>
+  </section>
+
   <header>
     <div class="container">
       <!-- NEW TOP BUTTONS -->
@@ -827,6 +1130,8 @@
         <a href="food.html"><button>🍛 Food of India</button></a>
         <a href="wildlife.html"><button>🐅 Wildlife</button></a>
         <a href="famous.html"><button>⭐ Famous People</button></a>
+        <a href="#landmarks"><button>🏛️ Landmarks</button></a>
+        <a href="innovation.html"><button>💡 Innovation</button></a>
       </div>
       <nav aria-label="Main">
         <a href="#overview"><span data-lang="en">Overview</span><span data-lang="bn">ওভারভিউ</span><span data-lang="hi">ओवरव्यू</span></a>
@@ -860,16 +1165,23 @@
               <span data-lang="hi">दक्षिण एशिया का एक देश — संक्षिप्त सारांश नीचे</span>
             </span>
           </div>
-          <p class="lead">
-            <span data-lang="en">India, officially the Republic of India, is a country in South Asia. It is the world's most populous democracy and the second-most populous country after China. India is known for its diverse cultures, languages, religions, landscapes, and long history.</span>
-            <span data-lang="bn">ভারত, আনুষ্ঠানিকভাবে ভারতের প্রজাতন্ত্র, দক্ষিণ এশিয়ার একটি দেশ। এটি বিশ্বের সবচেয়ে জনবহুল গণতন্ত্র এবং চীনের পরে দ্বিতীয় সর্বাধিক জনবহুল দেশ। ভারত তার বৈচিত্র্যময় সংস্কৃতি, ভাষা, ধর্ম, ভূদৃশ্য এবং দীর্ঘ ইতিহাসের জন্য পরিচিত।</span>
-            <span data-lang="hi">भारत, आधिकारिक रूप से भारत गणराज्य, दक्षिण एशिया का एक देश है। यह दुनिया का सबसे अधिक जनसंख्या वाला लोकतंत्र है और चीन के बाद दूसरा सबसे अधिक जनसंख्या वाला देश है। भारत अपनी विविध संस्कृतियों, भाषाओं, धर्मों, परिदृश्यों और लंबे इतिहास के लिए जाना जाता है।</span>
-          </p>
-          <p class="muted">
-            <span data-lang="en">Quick facts: Capital — New Delhi; Largest city — Mumbai; Official languages — Hindi and English (associate official); Currency — Indian Rupee (INR); Area — ~3.287 million km²; Population — ~1.4 billion (2025 est.).</span>
-            <span data-lang="bn">দ্রুত তথ্য: রাজধানী — নয়াদিল্লি; বৃহত্তম শহর — মুম্বাই; সরকারি ভাষা — হিন্দি এবং ইংরেজি (সহযোগী সরকারি); মুদ্রা — ভারতীয় রুপি (INR); এলাকা — ~৩.২৮৭ মিলিয়ন কিমি²; জনসংখ্যা — ~১.৪ বিলিয়ন (২০২৫ অনুমান)।</span>
-            <span data-lang="hi">त्वरित तथ्य: राजधानी — नई दिल्ली; सबसे बड़ा शहर — मुंबई; आधिकारिक भाषाएँ — हिंदी और अंग्रेज़ी (सहायक आधिकारिक); मुद्रा — भारतीय रुपया (INR); क्षेत्रफल — ~3.287 मिलियन किमी²; जनसंख्या — ~1.4 अरब (2025 अनुमान)।</span>
-          </p>
+          <div class="section-content">
+            <div class="text-content">
+              <p class="lead">
+                <span data-lang="en">India, officially the Republic of India, is a country in South Asia. It is the world's most populous democracy and the second-most populous country after China. India is known for its diverse cultures, languages, religions, landscapes, and long history.</span>
+                <span data-lang="bn">ভারত, আনুষ্ঠানিকভাবে ভারতের প্রজাতন্ত্র, দক্ষিণ এশিয়ার একটি দেশ। এটি বিশ্বের সবচেয়ে জনবহুল গণতন্ত্র এবং চীনের পরে দ্বিতীয় সর্বাধিক জনবহুল দেশ। ভারত তার বৈচিত্র্যময় সংস্কৃতি, ভাষা, ধর্ম, ভূদৃশ্য এবং দীর্ঘ ইতিহাসের জন্য পরিচিত।</span>
+                <span data-lang="hi">भारत, आधिकारिक रूप से भारत गणराज्य, दक्षिण एशिया का एक देश है। यह दुनिया का सबसे अधिक जनसंख्या वाला लोकतंत्र है और चीन के बाद दूसरा सबसे अधिक जनसंख्या वाला देश है। भारत अपनी विविध संस्कृतियों, भाषाओं, धर्मों, परिदृश्यों और लंबे इतिहास के लिए जाना जाता है।</span>
+              </p>
+              <p class="muted">
+                <span data-lang="en">Quick facts: Capital — New Delhi; Largest city — Mumbai; Official languages — Hindi and English (associate official); Currency — Indian Rupee (INR); Area — ~3.287 million km²; Population — ~1.4 billion (2025 est.).</span>
+                <span data-lang="bn">দ্রুত তথ্য: রাজধানী — নয়াদিল্লি; বৃহত্তম শহর — মুম্বাই; সরকারি ভাষা — হিন্দি এবং ইংরেজি (সহযোগী সরকারি); মুদ্রা — ভারতীয় রুপি (INR); এলাকা — ~৩.২৮৭ মিলিয়ন কিমি²; জনসংখ্যা — ~১.৪ বিলিয়ন (২০২৫ অনুমান)।</span>
+                <span data-lang="hi">त्वरित तथ्य: राजधानी — नई दिल्ली; सबसे बड़ा शहर — मुंबई; आधिकारिक भाषाएँ — हिंदी और अंग्रेज़ी (सहायक आधिकारिक); मुद्रा — भारतीय रुपया (INR); क्षेत्रफल — ~3.287 मिलियन किमी²; जनसंख्या — ~1.4 अरब (2025 अनुमान)।</span>
+              </p>
+            </div>
+            <div class="image-content">
+              <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="India Landscape" class="section-image">
+            </div>
+          </div>
         </section>
 
         <!-- History -->
@@ -911,6 +1223,9 @@
             <li><span data-lang="en">Colonial (European trade, British East India Company, British Raj)</span><span data-lang="bn">উপনিবেশিক (ইউরোপীয় বাণিজ্য, ব্রিটিশ ইস্ট ইন্ডিয়া কোম্পানি, ব্রিটিশ রাজ)</span><span data-lang="hi">औपनिवेशिक (यूरोपीय व्यापार, ब्रिटिश ईस्ट इंडिया कंपनी, ब्रिटिश राज)</span></li>
             <li><span data-lang="en">Modern (Independence movement, partition 1947, post-independence development)</span><span data-lang="bn">আধুনিক (স্বাধীনতা আন্দোলন, ১৯৪৭ সালের বিভাজন, স্বাধীনতার পর উন্নয়ন)</span><span data-lang="hi">आधुनिक (स्वतंत्रता आंदोलन, 1947 का विभाजन, स्वतंत्रता के बाद का विकास)</span></li>
           </ul>
+          <div class="image-content">
+            <img src="https://images.unsplash.com/photo-1587135941948-670b381f08ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Taj Mahal" class="section-image">
+          </div>
         </section>
 
         <!-- Geography -->
@@ -989,6 +1304,54 @@
             <li><span data-lang="en">Large youth population; median age rising slowly as fertility declines.</span><span data-lang="bn">বড় যুব জনসংখ্যা; উর্বরতা কমার সঙ্গে সঙ্গে মধ্যবয়স ধীরে ধীরে বাড়ছে।</span><span data-lang="hi">बड़ी युवा आबादी; प्रजनन दर घटने के साथ मध्य आयु धीरे-धीरे बढ़ रही है।</span></li>
             <li><span data-lang="en">High urbanization with continuing significant rural population.</span><span data-lang="bn">উচ্চ নগরায়ন থাকলেও উল্লেখযোগ্য গ্রামীণ জনসংখ্যা অব্যাহত রয়েছে।</span><span data-lang="hi">उच्च शहरीकरण के साथ महत्वपूर्ण ग्रामीण आबादी बनी हुई है।</span></li>
           </ul>
+        </section>
+
+        <!-- Neon Insights -->
+        <section id="insights">
+          <div class="heading-row">
+            <h2>
+              <span data-lang="en"><i><b>Neon Insights</b></i></span>
+              <span data-lang="bn"><i><b>নিয়ন ইনসাইট</b></i></span>
+              <span data-lang="hi"><i><b>नियॉन इनसाइट्स</b></i></span>
+            </h2>
+            <span class="meaning">
+              <span data-lang="en">Supercharged stats and sparkly facts</span>
+              <span data-lang="bn">সুপারচার্জড স্ট্যাট এবং ঝকঝকে তথ্য</span>
+              <span data-lang="hi">सुपरचार्ज्ड आँकड़े और चमकीली बातें</span>
+            </span>
+          </div>
+          <div class="insights-grid">
+            <div class="insight-card">
+              <h3>1.4B+</h3>
+              <p><strong>The energy of over 1.4 billion people pulses through festivals, cities, and startups every day.</strong></p>
+            </div>
+            <div class="insight-card">
+              <h3>22</h3>
+              <p><strong>Officially recognized languages create one of the world's richest multilingual branches of culture.</strong></p>
+            </div>
+            <div class="insight-card">
+              <h3>36</h3>
+              <p>States and union territories form a varied network of landscapes, cuisines, and local legends.</p>
+            </div>
+            <div class="insight-card">
+              <h3>10+</h3>
+              <p>Major tech hubs are driving rapid growth in innovation, startups, and space ambitions.</p>
+            </div>
+          </div>
+          <div class="insight-panel">
+            <div class="spark-card">
+              <h3><span data-lang="en">Today's Cool Snapshot</span><span data-lang="bn">আজকের কুল স্ন্যাপশট</span><span data-lang="hi">आज की कूल स्नैपशॉट</span></h3>
+              <p><span data-lang="en">Live-style counters bring the main facts to life and keep the page feeling futuristic.</span><span data-lang="bn">লাইভ-স্টাইল কাউন্টার মূল তথ্যগুলোকে জীবন্ত করে তোলে এবং পৃষ্ঠাটি ভবিষ্যতধর্মী অনুভব করে।</span><span data-lang="hi">लाइव-स्टाइल काउंटर मुख्य तथ्यों को जीवंत बनाते हैं और पेज को भविष्यसूचक बनाते हैं।</span></p>
+              <div class="stat-pill"><span><span data-lang="en">Languages recognized</span><span data-lang="bn">ভাষা স্বীকৃত</span><span data-lang="hi">पहचानी भाषाएँ</span></span><strong data-target="22">0</strong></div>
+              <div class="stat-pill"><span><span data-lang="en">States + UTs</span><span data-lang="bn">রাজ্য + কেন্দ্রশাসিত অঞ্চল</span><span data-lang="hi">राज्य + केन्द्रीय क्षेत्र</span></span><strong data-target="36">0</strong></div>
+              <div class="stat-pill"><span><span data-lang="en">Top innovation hubs</span><span data-lang="bn">শীর্ষ উদ্ভাবন হাব</span><span data-lang="hi">शीर्ष नवप्रवर्तन हब</span></span><strong data-target="12">0</strong></div>
+            </div>
+            <div class="spark-card">
+              <h3><span data-lang="en">Extra Cool Feature</span><span data-lang="bn">অতিরিক্ত কুল ফিচার</span><span data-lang="hi">अतिरिक्त कूल फीचर</span></h3>
+              <p><span data-lang="en">Hover over buttons to see glowing highlights and keep the entire page feeling alive.</span><span data-lang="bn">বটনে হোভার করলে ঝকঝকে হাইলাইটস দেখুন এবং পুরো পৃষ্ঠাটি জীবন্ত রাখুন।</span><span data-lang="hi">बटनों पर होवर करें और ग्लोइंग हाइलाइट देखें ताकि पूरा पेज जीवंत महसूस हो।</span></p>
+              <p style="margin-top:1.1rem; color:#fff7dc; font-weight:700;">Tap the buttons above or scroll to unlock more surprise animations.</p>
+            </div>
+          </div>
         </section>
 
         <!-- Culture -->
@@ -1189,6 +1552,77 @@
           </p>
         </section>
 
+        <!-- Famous Landmarks -->
+        <section id="landmarks">
+          <div class="heading-row">
+            <h2>
+              <span data-lang="en"><i><b>Famous Landmarks</b></i></span>
+              <span data-lang="bn"><i><b>বিখ্যাত স্থান</b></i></span>
+              <span data-lang="hi"><i><b>प्रसिद्ध स्थल</b></i></span>
+            </h2>
+            <span class="meaning">
+              <span data-lang="en">Iconic places that define India's heritage</span>
+              <span data-lang="bn">ভারতের ঐতিহ্যকে সংজ্ঞায়িত করে এমন আইকনিক স্থান</span>
+              <span data-lang="hi">भारत की विरासत को परिभाषित करने वाले प्रतिष्ठित स्थान</span>
+            </span>
+          </div>
+          <div class="landmarks-grid">
+            <div class="landmark-card">
+              <img src="https://images.unsplash.com/photo-1587135941948-670b381f08ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Taj Mahal">
+              <h3>Taj Mahal</h3>
+              <p>Agra, Uttar Pradesh - A symbol of love and Mughal architecture.</p>
+            </div>
+            <div class="landmark-card">
+              <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="India Gate">
+              <h3>India Gate</h3>
+              <p>New Delhi - War memorial and national monument.</p>
+            </div>
+            <div class="landmark-card">
+              <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Golden Temple">
+              <h3>Golden Temple</h3>
+              <p>Amritsar, Punjab - Sacred Sikh shrine.</p>
+            </div>
+            <div class="landmark-card">
+              <img src="https://images.unsplash.com/photo-1587135941948-670b381f08ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Red Fort">
+              <h3>Red Fort</h3>
+              <p>Delhi - Historic Mughal fort and UNESCO site.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Extra Quick Explore Section -->
+        <section id="extras">
+          <div class="heading-row">
+            <h2>
+              <span data-lang="en"><i><b>Quick Explore</b></i></span>
+              <span data-lang="bn"><i><b>দ্রুত অন্বেষণ</b></i></span>
+              <span data-lang="hi"><i><b>त्वरित खोज</b></i></span>
+            </h2>
+            <span class="meaning">
+              <span data-lang="en">Jump straight to the best cultural, tech, and travel stories.</span>
+              <span data-lang="bn">সরাসরি সেরা সাংস্কৃতিক, প্রযুক্তি ও ভ্রমণ গল্পে যান।</span>
+              <span data-lang="hi">सीधे सर्वश्रेष्ठ सांस्कृतिक, तकनीकी और यात्रा कहानियों पर जाएँ।</span>
+            </span>
+          </div>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3>Festival Pulse</h3>
+              <p>Discover the biggest celebrations across India.</p>
+              <a href="festival.html"><button>See Festivals</button></a>
+            </div>
+            <div class="feature-card">
+              <h3>Heritage Route</h3>
+              <p>Explore historic sites, monuments, and legendary places.</p>
+              <a href="#landmarks"><button>View Landmarks</button></a>
+            </div>
+            <div class="feature-card">
+              <h3>Innovation Hub</h3>
+              <p>Learn about space, startups, and India’s growth story.</p>
+              <a href="innovation.html"><button>Explore Tech</button></a>
+            </div>
+          </div>
+        </section>
+
         <!-- Explore More Section -->
         <section>
           <div class="heading-row">
@@ -1218,6 +1652,7 @@
             <li><a class="anchor" href="#history"><span data-lang="en">History</span><span data-lang="bn">ইতিহাস</span><span data-lang="hi">इतिहास</span></a></li>
             <li><a class="anchor" href="#geography"><span data-lang="en">Geography</span><span data-lang="bn">ভূগোল</span><span data-lang="hi">भूगोल</span></a></li>
             <li><a class="anchor" href="#demographics"><span data-lang="en">Demographics</span><span data-lang="bn">জনসংখ্যাতাত্ত্বিক</span><span data-lang="hi">जनसांख्यिकी</span></a></li>
+            <li><a class="anchor" href="#insights"><span data-lang="en">Neon Insights</span><span data-lang="bn">নিয়ন ইনসাইট</span><span data-lang="hi">नियॉन इनसाइट्स</span></a></li>
             <li><a class="anchor" href="#culture"><span data-lang="en">Culture</span><span data-lang="bn">সংস্কৃতি</span><span data-lang="hi">संस्कृति</span></a></li>
             <li><a class="anchor" href="#economy"><span data-lang="en">Economy</span><span data-lang="bn">অর্থনীতি</span><span data-lang="hi">अर्थव्यवस्था</span></a></li>
             <li><a class="anchor" href="#government"><span data-lang="en">Government</span><span data-lang="bn">সরকার</span><span data-lang="hi">सरकार</span></a></li>
@@ -1316,7 +1751,42 @@
       });
     }
 
-    window.addEventListener('DOMContentLoaded', revealSections);
+    window.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('loaded');
+      revealSections();
+      animateInsightCounters();
+    });
+
+    function animateInsightCounters() {
+      const counters = document.querySelectorAll('.stat-pill strong');
+      const reveal = (entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.querySelectorAll('strong').forEach((counter) => {
+          const target = +counter.getAttribute('data-target');
+          let current = 0;
+          const step = Math.max(1, Math.floor(target / 40));
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              counter.textContent = target.toString();
+              clearInterval(timer);
+            } else {
+              counter.textContent = current.toString();
+            }
+          }, 18);
+        });
+      };
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            reveal(entry);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      const insights = document.querySelectorAll('#insights .spark-card');
+      insights.forEach((block) => observer.observe(block));
+    }
   </script>
 
   <script>
@@ -1330,72 +1800,54 @@
       trail.className = 'cursor-trail';
       trail.style.left = x + 'px';
       trail.style.top = y + 'px';
-
-      const colors = [
-        { main: 'rgba(11, 92, 255, 0.8)', glow: 'rgba(13, 71, 161, 0.4)' },      // Blue
-        { main: 'rgba(255, 67, 54, 0.8)', glow: 'rgba(229, 57, 53, 0.4)' },     // Red
-        { main: 'rgba(251, 188, 4, 0.8)', glow: 'rgba(245, 127, 23, 0.4)' },    // Orange
-        { main: 'rgba(76, 175, 80, 0.8)', glow: 'rgba(56, 142, 60, 0.4)' },     // Green
-        { main: 'rgba(156, 39, 176, 0.8)', glow: 'rgba(123, 31, 162, 0.4)' },   // Purple
-        { main: 'rgba(233, 30, 99, 0.8)', glow: 'rgba(194, 24, 91, 0.4)' },     // Pink
-        { main: 'rgba(0, 188, 212, 0.8)', glow: 'rgba(0, 172, 193, 0.4)' },     // Cyan
-        { main: 'rgba(255, 193, 7, 0.8)', glow: 'rgba(255, 152, 0, 0.4)' }      // Amber
-      ];
-
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      trail.style.setProperty('--particle-color', color.main);
-      trail.style.setProperty('--particle-glow', color.glow);
-
-      const offsetX = (Math.random() - 0.5) * 20;
-      const offsetY = (Math.random() - 0.5) * 20;
-      trail.style.setProperty('--tx', offsetX + 'px');
-      trail.style.setProperty('--ty', offsetY + 'px');
-
+      const size = 12 + Math.random() * 18;
+      trail.style.width = `${size}px`;
+      trail.style.height = `${size}px`;
+      trail.style.setProperty('--scale', (0.7 + Math.random() * 0.6).toString());
+      trail.style.setProperty('--tx', `${(Math.random() - 0.5) * 36}px`);
+      trail.style.setProperty('--ty', `${(Math.random() - 0.5) * 36}px`);
       document.body.appendChild(trail);
-      setTimeout(() => trail.remove(), 800);
+      setTimeout(() => trail.remove(), 900);
     }
   </script>
 
   <script>
-    // Lightning Bolts, Flash, and Shockwave Effects
-    function createBolt(x, y) {
-      const bolt = document.createElement("div");
-      bolt.classList.add("bolt");
-      const angle = Math.random() * 360;
-      bolt.style.transform = `rotate(${angle}deg)`;
-      bolt.style.left = x + "px";
-      bolt.style.top = y + "px";
-      document.body.appendChild(bolt);
-      setTimeout(() => bolt.remove(), 350);
-    }
-
-    document.addEventListener("click", function(e) {
-      // Shockwave
-      const shock = document.createElement("div");
-      shock.classList.add("shockwave");
-      shock.style.left = e.pageX + "px";
-      shock.style.top = e.pageY + "px";
-      document.body.appendChild(shock);
-      setTimeout(() => shock.remove(), 500);
-
-      // Flash
-      const flash = document.createElement("div");
-      flash.classList.add("flash");
-      document.body.appendChild(flash);
-      setTimeout(() => flash.remove(), 250);
-
-      // Multiple Bolts
-      for (let i = 0; i < 6; i++) {
-        createBolt(e.pageX, e.pageY);
-      }
+    // Button hover cursor glow
+    document.querySelectorAll('button').forEach((button) => {
+      button.addEventListener('mousemove', (event) => {
+        const rect = button.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        button.style.setProperty('--x', `${x}px`);
+        button.style.setProperty('--y', `${y}px`);
+      });
     });
   </script>
 
   <script>
-    // Page Load Animation Trigger
-    window.onload = () => {
-      document.body.classList.add('loaded');
-    };
+    // Parallax Effect
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * -0.5;
+      document.querySelector('.page-background').style.transform = `translateY(${rate}px)`;
+    });
   </script>
+
+  <script>
+    // Scroll to Top Button Visibility
+    window.addEventListener('scroll', () => {
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      if (!scrollToTopBtn) return;
+      if (window.pageYOffset > 300) {
+        scrollToTopBtn.classList.add('show');
+      } else {
+        scrollToTopBtn.classList.remove('show');
+      }
+    });
+  </script>
+
+  <button id="scrollToTop" class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 </body>
 </html>
