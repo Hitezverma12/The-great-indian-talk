@@ -30,6 +30,54 @@ body {
     background-attachment: fixed;
 }
 
+<style>
+
+/* your other CSS here */
+
+/* ⚡ Upgraded Lightning Bolts */
+.bolt {
+  position: fixed;
+  width: 4px;
+  height: 120px;
+  background: white;
+  box-shadow:
+    0 0 20px #00eaff,
+    0 0 40px #00eaff,
+    0 0 60px #00eaff;
+  transform-origin: center;
+  pointer-events: none;
+  animation: boltFade 0.35s linear forwards;
+}
+
+/* keep your boltFade keyframes here */
+
+/* 💥 Shockwave CSS stays here */
+
+/* ⚡ Screen Flash Effect */
+.flash {
+
+@keyframes flashFade {
+  0% { opacity: 0.7; }
+  100% { opacity: 0; }
+}
+
+  position: fixed;
+  inset: 0;
+  background: white;
+  opacity: 0.7;
+  pointer-events: none;
+  animation: flashFade 0.25s ease-out forwards;
+}
+
+@keyframes flashFade {
+  0% { opacity: 0.7; }
+  100% { opacity: 0; }
+}
+
+</style>
+
+
+
 
 
 
@@ -1104,6 +1152,45 @@ header button:hover{
     document.body.classList.add('loaded');
   };
 </script>
+
+<script>
+// ⚡ Random Lightning Bolts
+function createBolt(x, y) {
+  const bolt = document.createElement("div");
+  bolt.classList.add("bolt");
+
+  const angle = Math.random() * 360;
+  bolt.style.transform = `rotate(${angle}deg)`;
+
+  bolt.style.left = x + "px";
+  bolt.style.top = y + "px";
+
+  document.body.appendChild(bolt);
+
+  setTimeout(() => bolt.remove(), 350);
+}
+
+// ⚡ Screen Flash + Bolts + Shockwave
+document.addEventListener("click", function(e) {
+  const shock = document.createElement("div");
+  shock.classList.add("shockwave");
+  shock.style.left = e.pageX - 10 + "px";
+  shock.style.top = e.pageY - 10 + "px";
+  document.body.appendChild(shock);
+  setTimeout(() => shock.remove(), 500);
+
+  const flash = document.createElement("div");
+  flash.classList.add("flash");
+  document.body.appendChild(flash);
+  setTimeout(() => flash.remove(), 250);
+
+  for (let i = 0; i < 6; i++) {
+    createBolt(e.pageX, e.pageY);
+  }
+});
+</script>
+
+</body>
 
 
 </body>
